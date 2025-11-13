@@ -1,79 +1,143 @@
-🚗 U.S. Car Accident Severity Prediction (2016-2023)
-Objective
-This project analyzes over 500,000 U.S. car accidents (2016–2023) to predict crash severity and identify the key environmental, demographic, and situational factors that contribute to severe outcomes.
-Using R, I developed and compared multiple machine learning models—including k-Nearest Neighbors (k-NN), Classification Trees, and Bagging—to classify accidents into four severity levels and uncover patterns that inform road safety insights.
-Table of Contents
-Dataset
-Technologies
-Data Preparation
-Exploratory Data Analysis (EDA)
-Modeling and Evaluation
-k-Nearest Neighbors (k-NN)
-Classification Trees and Bagging
-Logistic Regression
-Key Findings
-Future Work
-Dataset
-Source: Kaggle - U.S. Accidents Dataset (2016–2023)
-Size: 500,000 sampled accidents across 49 U.S. states
-Target Variable: Severity (1–4 scale)
-Features: Weather, environmental, and demographic factors including humidity, temperature, visibility, distance, population, and density
-Data Collection:
-The dataset aggregates data from traffic sensors, law enforcement reports, and departmental APIs.
-Data Integration:
-An external U.S. Census dataset was joined by State and City to incorporate demographic context such as population and population density.
-Technologies
-Category	Tools / Packages
-Language	R
-Data Wrangling	tidyverse, readr
-Visualization	ggplot2, GGally
-Modeling	caret, class, rpart, rpart.plot, ipred, bestglm
-Environment	RStudio
-Data Preparation
-Import and Cleaning
-Removed missing values (NA) from key features.
-Selected relevant predictors such as humidity, temperature, distance, and demographic variables.
-Standardized continuous predictors for model comparability.
-Merging External Data
-Joined the accident dataset with U.S. Census data on State and City to add population and density variables.
-Feature Selection
-Retained predictors with meaningful variance and interpretability for modeling tasks.
-Exploratory Data Analysis (EDA)
-EDA focused on understanding relationships between severity levels and environmental or demographic features.
-Visualizations (produced in code):
-Distribution of accident severity (bar plot)
-Correlation heatmap between numerical predictors
-Boxplots comparing severity by humidity, temperature, and population density
-Geographic trends in severity by state
-(Insert generated visuals here once available)
-Modeling and Evaluation
-k-Nearest Neighbors (k-NN)
-Implemented using the class package.
-Tuned neighborhood size (k) for optimal accuracy.
-Evaluated performance via confusion matrices.
-Insight:
-Accident severity patterns showed non-linear relationships between environmental variables, with k-NN providing moderate accuracy but sensitivity to feature scaling.
-Classification Trees and Bagging
-Built a decision tree using rpart and visualized with rpart.plot.
-Applied bagging with the ipred package to improve model stability and reduce variance.
-Variable importance plots were used to identify influential predictors.
-Key Results:
-Population emerged as the strongest predictor of crash severity.
-Population density and humidity were secondary contributors.
-Distance was a key split variable distinguishing low- from high-severity crashes.
-Example Findings from Tree Splits:
-Low distance + low humidity → higher likelihood of Severity 3 crashes
-High population → increased probability of Severity 4 (most severe)
-Low population → linked to moderate (Severity 2) crashes
-Bagging emphasized urban context and environmental conditions as major factors.
-Logistic Regression
-Tested logistic regression models using bestglm, but they offered limited predictive power for the four-class severity target.
-Non-linear decision boundaries in environmental variables made tree-based models more suitable.
-Key Findings
-Factor	Relationship to Severity
-Population	Strongest predictor; high population → more severe crashes
-Population Density	Amplifies severity when combined with high population
-Humidity	Low humidity linked to higher severity
-Distance	Shorter travel distance associated with higher severity
-Weather Variables (Temperature, Visibility)	Moderate influence but less significant than demographics
-Overall, demographic context outweighed weather features in predicting crash severity, highlighting the importance of population-related infrastructure factors.
+# 🚗 Car Accident Severity Analysis
+
+**Language:** R  
+**Libraries:** `tidyverse`, `GGally`, `caret`, `rpart`, `rpart.plot`, `ipred`, `readr`, `class`, `bestglm`  
+**Dataset:** U.S. Car Accidents (Kaggle) — 500K sampled accidents (2016–2023) across 49 states  
+
+---
+
+## 🧠 Objective
+
+Predict accident severity (1–4) using demographic, environmental, and weather-related factors.
+
+---
+
+## 📊 Data Description
+
+- Covers **U.S. car accidents (2016–2023)**
+- Data collected from **traffic sensors, cameras, and APIs**
+- **Target:** Severity level (1–4)  
+- **Predictors:** Temperature, humidity, distance, wind speed, population, density, etc.  
+- Sampled **500K** records from Kaggle across **49 states**
+- Data joined with U.S. city demographics for richer context  
+
+**Data cleaning steps:**
+1. Removed missing values (`NA`)
+2. Joined accident data with `uscities.csv` on `City` and `State`
+3. Selected relevant features and standardized variables
+
+---
+
+## 🔍 Exploratory Data Analysis (EDA)
+
+- Visualized severity distribution  
+- Plotted variable relationships with `GGally::ggpairs`  
+- Examined accident frequency by month and hour  
+- Mapped accidents by city using `leaflet`  
+
+🖼️ *Visuals: (Insert generated plots here)*  
+- Histogram of Severity  
+- Accidents per Month  
+- Accidents by Hour  
+- City Distributions (Miami, Los Angeles, Orlando, Dallas, Houston)  
+- Miami Severity Map  
+
+---
+
+## 🧩 Milestone 1: k-Nearest Neighbors (kNN)
+
+**Goal:** Classify accident severity using environmental and demographic predictors.
+
+**Steps:**
+1. Stratified and sampled data by severity class  
+2. Split into 70/30 train-test sets  
+3. Trained kNN model with varying `k` values  
+4. Evaluated performance using confusion matrices  
+
+**Best Model:**  
+- **k = 23** gave the highest accuracy  
+- *Accuracy:* ~72%  
+
+🖼️ *Visual: Accuracy vs. Neighborhood Size plot*
+
+---
+
+## 🌳 Milestone 2: Classification Tree & Bagging
+
+**Goal:** Identify the most influential predictors of accident severity.
+
+**Methods:**
+- Built a **classification tree** using `rpart`
+- Pruned using optimal CP value
+- Applied **bagging** with both `ipred` and `caret` for model stability
+
+**Key Findings:**
+- **Distance, Humidity, and Population** were major split variables  
+- **Low distance + low humidity → more severe crashes (Severity 3)**  
+- **High population density → linked to Severity 4**  
+- **Low population → linked to moderate crashes (Severity 2)**  
+- **Population** emerged as the strongest predictor, followed by **density** and **humidity**  
+
+🖼️ *Visuals:*  
+- Classification tree diagram  
+- Variable importance plot (from `vip`)
+
+---
+
+## 📈 Milestone 3: Logistic Regression Models
+
+**Goal:** Predict binary severity (Mild vs. Severe) using logistic regression.
+
+**Approach:**
+- Created binary variable:  
+  - `Severity < 3 → Mild (0)`  
+  - `Severity ≥ 3 → Severe (1)`  
+- Trained multiple logistic regression models with environmental and demographic variables  
+- Used stepwise selection and `bestglm` for best subset selection  
+
+**Results:**
+- Logistic regression models achieved **moderate performance**  
+- Weather features (temperature, humidity, wind) had weaker effects  
+- **Demographic context (population, density)** remained dominant predictors  
+
+🖼️ *Visuals:*  
+- Correlation matrix (`GGally`)  
+- Logistic regression fit plots
+
+---
+
+## 🧩 Summary of Findings
+
+| Predictor        | Influence on Severity                     | Notes |
+|------------------|--------------------------------------------|-------|
+| **Population**   | Strongest predictor                        | High population areas → higher severity |
+| **Density**      | Moderate                                   | Urban areas → more severe crashes |
+| **Humidity**     | Moderate                                   | Low humidity → higher severity |
+| **Distance (mi)**| Moderate                                   | Shorter trips → higher severity |
+| **Weather vars** | Weak                                       | Temperature, wind speed less predictive |
+
+---
+
+## ⚙️ Tools and Methods Used
+
+- **R** for data cleaning, visualization, and modeling  
+- **kNN**, **Classification Trees**, **Bagging**, and **Logistic Regression**  
+- **Visualization:** `ggplot2`, `GGally`, `leaflet`, `vip`  
+- **Feature Selection:** `bestglm`, `step()`  
+
+---
+
+## 📚 Key Takeaways
+
+- Urban and demographic context (population, density) drives severity more than weather conditions.  
+- Ensemble methods like **bagging** outperform single decision trees.  
+- Logistic regression was less effective due to the complex, non-linear nature of the data.  
+- Future work: test **random forests** or **gradient boosting** for higher predictive accuracy.
+
+---
+
+🧾 **Author:** *Mia Parker*  
+📅 **Project Year:** 2025  
+📍 **Language:** R  
+
+---
