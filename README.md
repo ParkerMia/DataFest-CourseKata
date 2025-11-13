@@ -1,4 +1,4 @@
-# 🚗 Car Accident Severity Analysis
+# Car Accident Severity Analysis
 
 **Language:** R  
 **Libraries:** `tidyverse`, `GGally`, `caret`, `rpart`, `rpart.plot`, `ipred`, `readr`, `class`, `bestglm`  
@@ -6,13 +6,13 @@
 
 ---
 
-## 🧠 Objective
+## Objective
 
 Predict accident severity (1–4) using demographic, environmental, and weather-related factors.
 
 ---
 
-## 📊 Data Description
+## Data Description
 
 - Covers **U.S. car accidents (2016–2023)**
 - Data collected from **traffic sensors, cameras, and APIs**
@@ -28,14 +28,14 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 
 ---
 
-## 🔍 Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 
 - Visualized severity distribution  
 - Plotted variable relationships with `GGally::ggpairs`  
 - Examined accident frequency by month and hour  
 - Mapped accidents by city using `leaflet`  
 
-🖼️ *Visuals: (Insert generated plots here)*  
+*Visuals: (Insert generated plots here)*  
 - Histogram of Severity  
 - Accidents per Month  
 - Accidents by Hour  
@@ -44,7 +44,7 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 
 ---
 
-## 🧩 Milestone 1: k-Nearest Neighbors (kNN)
+## Part 1: k-Nearest Neighbors (kNN)
 
 **Goal:** Classify accident severity using environmental and demographic predictors.
 
@@ -58,11 +58,11 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 - **k = 23** gave the highest accuracy  
 - *Accuracy:* ~72%  
 
-🖼️ *Visual: Accuracy vs. Neighborhood Size plot*
+*Visual: Accuracy vs. Neighborhood Size plot*
 
 ---
 
-## 🌳 Milestone 2: Classification Tree & Bagging
+## Part 2: Classification Tree & Bagging
 
 **Goal:** Identify the most influential predictors of accident severity.
 
@@ -78,13 +78,13 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 - **Low population → linked to moderate crashes (Severity 2)**  
 - **Population** emerged as the strongest predictor, followed by **density** and **humidity**  
 
-🖼️ *Visuals:*  
+*Visuals:*  
 - Classification tree diagram  
 - Variable importance plot (from `vip`)
 
 ---
 
-## 📈 Milestone 3: Logistic Regression Models
+## Part 3: Logistic Regression Models
 
 **Goal:** Predict binary severity (Mild vs. Severe) using logistic regression.
 
@@ -100,13 +100,13 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 - Weather features (temperature, humidity, wind) had weaker effects  
 - **Demographic context (population, density)** remained dominant predictors  
 
-🖼️ *Visuals:*  
+*Visuals:*  
 - Correlation matrix (`GGally`)  
 - Logistic regression fit plots
 
 ---
 
-## 🧩 Summary of Findings
+## Summary of Findings
 
 | Predictor        | Influence on Severity                     | Notes |
 |------------------|--------------------------------------------|-------|
@@ -118,7 +118,7 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 
 ---
 
-## ⚙️ Tools and Methods Used
+## Tools and Methods Used
 
 - **R** for data cleaning, visualization, and modeling  
 - **kNN**, **Classification Trees**, **Bagging**, and **Logistic Regression**  
@@ -127,7 +127,7 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 
 ---
 
-## 📚 Key Takeaways
+## Key Takeaways
 
 - Urban and demographic context (population, density) drives severity more than weather conditions.  
 - Ensemble methods like **bagging** outperform single decision trees.  
@@ -136,8 +136,8 @@ Predict accident severity (1–4) using demographic, environmental, and weather-
 
 ---
 
-🧾 **Author:** *Mia Parker*  
-📅 **Project Year:** 2025  
-📍 **Language:** R  
+**Author:** *Mia Parker*  
+**Project Year:** 2025  
+**Language:** R  
 
 ---
