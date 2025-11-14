@@ -118,16 +118,3 @@
 - Reduce reliance on Association items for routine practice  
 - Expand Short Text opportunities for formative assessment  
 
----
-
-## Tools and Methods Used
-
-- **R** for data cleaning, merging, and visualization *(original scripts no longer available)*  
-- Percentile grouping for performance segmentation  
-- Categorical analysis by question type  
-- Visual exploration of EOC distributions  
-
----
-
-**Author:** Mia Parker  
-**Language:** R
