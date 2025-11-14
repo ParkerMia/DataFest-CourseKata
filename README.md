@@ -1,6 +1,6 @@
 # CourseKata Learning Analytics — DataFest 2024
 
-**Language:** R (original code no longer available)  
+**Language:** Python (original code no longer available)  
 **Libraries:** Used standard data-cleaning and visualization tools (tidyverse, etc.)  
 **Dataset:** CourseKata Learnosity Question-Level Data (Statistics & Data Science ABC Book)  
 **Group Project:** Completed as part of a collaborative team effort  
